@@ -49,17 +49,27 @@ def show():
         tm.stop()
 
         value = []
+        scores = []
         if faces[1] is not None:
             for x in range(len(faces[1])):
                 face_align = recognizer.alignCrop(frame, faces[1][x])
                 face_feature = recognizer.feature(face_align)
                 test_predict = svc.predict(face_feature)
                 result = mydict[test_predict[0]]
+
                 value.append(test_predict[0])
+
+                score = svc.decision_function(face_feature)
+                best_idx = np.argmax(score)
+                confidence = score[0][best_idx]
+                scores.append(confidence)
+                
+
+
                 cv2.putText(frame,result,(1,50 + 20*x),cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[test_predict[0]], 2)
         
         # Draw results on the input image
-        visualize(frame, faces, tm.getFPS(), value=value)
+        visualize(frame, faces, tm.getFPS(), value=value, scores=scores)
 
 
         # Chuyển BGR → RGB (Streamlit cần ảnh RGB)
@@ -95,21 +105,21 @@ svc = joblib.load('./model/svc.pkl')
 mydict = ['Duy','Hieu','Lam','Luan', 'PhamHuong']
 colors = [(0, 0, 255), (255, 0, 0), (0, 255, 0), (0, 255, 255), (255, 0, 255)]
 
-def visualize(input, faces, fps, thickness=2, value=None):
+def visualize(input, faces, fps, thickness=2, value=None, scores=None):
     if faces[1] is not None:
         for idx, face in enumerate(faces[1]):
-            print('Face {}, top-left coordinates: ({:.0f}, {:.0f}), box width: {:.0f}, box height {:.0f}, score: {:.2f}'.format(idx, face[0], face[1], face[2], face[3], face[-1]))
+            #print('Face {}, top-left coordinates: ({:.0f}, {:.0f}), box width: {:.0f}, box height {:.0f}, score: {:.2f}'.format(idx, face[0], face[1], face[2], face[3], face[-1]))
+            if scores[idx] > 0.6:
+                if value and idx < len(value):
+                    color = colors[value[idx]]
+                else:
+                    color = (255, 255, 255)
 
-            if value and idx < len(value):
-                color = colors[value[idx]]
-            else:
-                color = (255, 255, 255)
-
-            coords = face[:-1].astype(np.int32)
-            cv2.rectangle(input, (coords[0], coords[1]), (coords[0]+coords[2], coords[1]+coords[3]), color, thickness)
-            cv2.circle(input, (coords[4], coords[5]), 2, (255, 0, 0), thickness)
-            cv2.circle(input, (coords[6], coords[7]), 2, (0, 0, 255), thickness)
-            cv2.circle(input, (coords[8], coords[9]), 2, (0, 255, 0), thickness)
-            cv2.circle(input, (coords[10], coords[11]), 2, (255, 0, 255), thickness)
-            cv2.circle(input, (coords[12], coords[13]), 2, (0, 255, 255), thickness)
+                coords = face[:-1].astype(np.int32)
+                cv2.rectangle(input, (coords[0], coords[1]), (coords[0]+coords[2], coords[1]+coords[3]), color, thickness)
+                cv2.circle(input, (coords[4], coords[5]), 2, (255, 0, 0), thickness)
+                cv2.circle(input, (coords[6], coords[7]), 2, (0, 0, 255), thickness)
+                cv2.circle(input, (coords[8], coords[9]), 2, (0, 255, 0), thickness)
+                cv2.circle(input, (coords[10], coords[11]), 2, (255, 0, 255), thickness)
+                cv2.circle(input, (coords[12], coords[13]), 2, (0, 255, 255), thickness)
     cv2.putText(input, 'FPS: {:.2f}'.format(fps), (1, 16), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
