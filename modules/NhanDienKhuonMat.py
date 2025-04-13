@@ -47,19 +47,19 @@ def show():
         tm.start()
         faces = detector.detect(frame) # faces is a tuple
         tm.stop()
-        
-        key = cv2.waitKey(1)
-        if key == 27:
-            break
-        if faces[1] is not None:
-            face_align = recognizer.alignCrop(frame, faces[1][0])
-            face_feature = recognizer.feature(face_align)
-            test_predict = svc.predict(face_feature)
-            result = mydict[test_predict[0]]
-            cv2.putText(frame,result,(1,50),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+        value = []
+        if faces[1] is not None:
+            for x in range(len(faces[1])):
+                face_align = recognizer.alignCrop(frame, faces[1][x])
+                face_feature = recognizer.feature(face_align)
+                test_predict = svc.predict(face_feature)
+                result = mydict[test_predict[0]]
+                value.append(test_predict[0])
+                cv2.putText(frame,result,(1,50 + 20*x),cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[test_predict[0]], 2)
+        
         # Draw results on the input image
-        visualize(frame, faces, tm.getFPS())
+        visualize(frame, faces, tm.getFPS(), value=value)
 
 
         # Chuyển BGR → RGB (Streamlit cần ảnh RGB)
@@ -93,14 +93,20 @@ args = parser.parse_args()
 
 svc = joblib.load('./model/svc.pkl')
 mydict = ['Duy','Hieu','Lam','Luan', 'PhamHuong']
+colors = [(0, 0, 255), (255, 0, 0), (0, 255, 0), (0, 255, 255), (255, 0, 255)]
 
-def visualize(input, faces, fps, thickness=2):
+def visualize(input, faces, fps, thickness=2, value=None):
     if faces[1] is not None:
         for idx, face in enumerate(faces[1]):
             print('Face {}, top-left coordinates: ({:.0f}, {:.0f}), box width: {:.0f}, box height {:.0f}, score: {:.2f}'.format(idx, face[0], face[1], face[2], face[3], face[-1]))
 
+            if value and idx < len(value):
+                color = colors[value[idx]]
+            else:
+                color = (255, 255, 255)
+
             coords = face[:-1].astype(np.int32)
-            cv2.rectangle(input, (coords[0], coords[1]), (coords[0]+coords[2], coords[1]+coords[3]), (0, 255, 0), thickness)
+            cv2.rectangle(input, (coords[0], coords[1]), (coords[0]+coords[2], coords[1]+coords[3]), color, thickness)
             cv2.circle(input, (coords[4], coords[5]), 2, (255, 0, 0), thickness)
             cv2.circle(input, (coords[6], coords[7]), 2, (0, 0, 255), thickness)
             cv2.circle(input, (coords[8], coords[9]), 2, (0, 255, 0), thickness)
