@@ -4,7 +4,11 @@ import numpy as np
 from library import Chapter4 as c4  # Module xử lý ảnh của bạn
 
 chuong4_options = [
-    "Spectrum"]
+    "Spectrum",
+    "Remove Moire",
+    "Remove Interference",
+    "Plot Motion Filter",
+    "Demotion"]
 
 def show():
     st.subheader("Chương 4")
@@ -35,7 +39,15 @@ def show():
 
             if selected_option == "Spectrum":
                 imgout = c4.Spectrum(imgin)
-            elif selected_option == "":
+            elif selected_option == "Remove Moire":
+                imgout = c4.RemoveMoire(imgin)
+            elif selected_option == "Remove Interference":
+                imgout = c4.RemoveInterference(imgin)
+            elif selected_option == "Plot Motion Filter":
+                imgout = c4.PlotMotionFilter(imgin)
+            elif selected_option == "Demotion":
+                imgout = c4.Demotion(imgin)
+            else:
                 pass
 
             # --- Hiển thị ảnh đã xử lý ---
