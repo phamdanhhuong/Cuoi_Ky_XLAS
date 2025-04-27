@@ -1,5 +1,5 @@
 import streamlit as st
-from modules import GioiThieu, Chuong3, Chuong4, NhanDienKhuonMat
+from modules import GioiThieu, Chuong3, Chuong4, Chuong9, NhanDienKhuonMat
 
 
 
@@ -16,6 +16,7 @@ st.sidebar.title("Menu")
 st.sidebar.button("Giới thiệu", on_click=set_selection, args=("GioiThieu",))
 st.sidebar.button("Chương 3", on_click=set_selection, args=("Chuong3",))
 st.sidebar.button("Chương 4", on_click=set_selection, args=("Chuong4",))
+st.sidebar.button("Chương 9", on_click=set_selection, args=("Chuong9",))
 st.sidebar.button("Nhận diện khuôn mặt", on_click=set_selection, args=("NhanDienKhuonMat",))
 
 # Hiển thị nội dung tương ứng
@@ -27,6 +28,8 @@ elif selected == "Chuong3":
     Chuong3.show()
 elif selected == "Chuong4":
     Chuong4.show()
+elif selected == "Chuong9":
+    Chuong9.show()
 elif selected == "NhanDienKhuonMat":
     NhanDienKhuonMat.show()
     
