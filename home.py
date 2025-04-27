@@ -1,7 +1,10 @@
 import streamlit as st
-from modules import GioiThieu, Chuong3, Chuong4, Chuong9, NhanDienKhuonMat
+from modules import GioiThieu, Chuong3, Chuong4, Chuong9, NhanDienKhuonMat, trai_cay
+import streamlit as st
+import os
 
 
+st.set_page_config(page_title="Ứng dụng xử lý ảnh")
 
 # Khởi tạo trạng thái nếu chưa có
 if 'selected' not in st.session_state:
@@ -18,6 +21,7 @@ st.sidebar.button("Chương 3", on_click=set_selection, args=("Chuong3",))
 st.sidebar.button("Chương 4", on_click=set_selection, args=("Chuong4",))
 st.sidebar.button("Chương 9", on_click=set_selection, args=("Chuong9",))
 st.sidebar.button("Nhận diện khuôn mặt", on_click=set_selection, args=("NhanDienKhuonMat",))
+st.sidebar.button("Nhận diện trái cây", on_click=set_selection, args=("TraiCay",))
 
 # Hiển thị nội dung tương ứng
 selected = st.session_state.selected
@@ -32,4 +36,6 @@ elif selected == "Chuong9":
     Chuong9.show()
 elif selected == "NhanDienKhuonMat":
     NhanDienKhuonMat.show()
+elif selected == "TraiCay":
+    trai_cay.show()
     
