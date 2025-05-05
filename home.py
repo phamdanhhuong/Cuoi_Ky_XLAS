@@ -41,4 +41,6 @@ elif selected == "NhanDienKhuonMat":
     NhanDienKhuonMat.show()
 elif selected == "TraiCay":
     trai_cay.show()
-    
+
+
+
