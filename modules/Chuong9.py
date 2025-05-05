@@ -9,7 +9,9 @@ chuong9_options = [
     "Boundary",
     "Contour",
     "Convex Hull",
-    "Defect Detect"]
+    "Defect Detect",
+    "Connect Components",
+    "Remove Small Rice"]
 
 def show():
     st.subheader("Chương 9")
@@ -50,6 +52,10 @@ def show():
                 imgout = c9.ConvexHull(imgin)
             elif selected_option == "Defect Detect":
                 imgout = c9.DefectDetect(imgin)
+            elif selected_option == "Connect Components":
+                imgout = c9.ConnectComponents(imgin)
+            elif selected_option == "Remove Small Rice":
+                imgout = c9.RemoveSmallRice(imgin)
             else:
                 pass
 
