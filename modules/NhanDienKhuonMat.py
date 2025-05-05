@@ -8,13 +8,32 @@ import joblib
 def show():
     st.subheader("Nhận diện khuôn mặt")
 
-    run = st.checkbox('Bắt đầu Webcam')
+    run = st.checkbox('Bắt đầu')
+
+    video_source = st.selectbox(
+        "Video",
+        ("webcam", "video"),
+    )
+
+    video_file = None
+    if video_source == "video":
+        video_file = st.file_uploader("Chọn video", type=["mp4", "avi", "mov"])
 
     FRAME_WINDOW = st.image([])
 
     cap = None
     if run:
-        cap = cv2.VideoCapture(0)
+        #cap = cv2.VideoCapture(0)
+        if video_source == "webcam":
+            cap = cv2.VideoCapture(0)
+        elif video_source == "video" and video_file is not None:
+            with open("temp_video.mp4", "wb") as f:
+                f.write(video_file.read())
+            cap = cv2.VideoCapture("temp_video.mp4")
+        else:
+            st.warning("Hãy chọn file video để tiếp tục.")
+            st.stop()
+
         detector = cv2.FaceDetectorYN.create(
             args.face_detection_model,
             "",
@@ -35,8 +54,13 @@ def show():
     while run:
         ret, frame = cap.read()
         if not ret:
-            st.write("Không thể đọc camera")
-            break
+            if video_source == "video":
+                # Nếu hết video, tua lại đầu
+                cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                continue
+            else:
+                st.write("Không thể đọc camera")
+                break
         
         hasFrame, frame = cap.read()
         if not hasFrame:

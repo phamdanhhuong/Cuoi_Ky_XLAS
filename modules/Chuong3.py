@@ -24,7 +24,7 @@ def show():
     st.subheader("Chương 3")
 
     # --- Sidebar ---
-    selected_option = st.sidebar.selectbox("Chọn chức năng:", chuong3_options)
+    selected_option = st.selectbox("Chọn chức năng:", chuong3_options)
 
     # --- Upload ảnh ---
     uploaded_file = st.file_uploader("Chọn ảnh", type=["jpg", "jpeg", "png","tif","bmp","webp"])
@@ -42,7 +42,7 @@ def show():
             st.image(st.session_state.imgin_color, caption="Ảnh gốc", use_container_width=True, channels="GRAY")
 
         # --- Nút xử lý ---
-        if st.sidebar.button("Xử lý"):
+        if st.button("Xử lý"):
             imgin = st.session_state.imgin
             imgin_color = st.session_state.imgin_color
             imgout = None

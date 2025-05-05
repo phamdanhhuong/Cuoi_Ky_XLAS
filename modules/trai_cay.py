@@ -12,45 +12,8 @@ from ultralytics.utils.downloads import GITHUB_ASSETS_STEMS
 
 
 class Inference:
-    """
-    A class to perform object detection, image classification, image segmentation and pose estimation inference.
-
-    This class provides functionalities for loading models, configuring settings, uploading video files, and performing
-    real-time inference using Streamlit and Ultralytics YOLO models.
-
-    Attributes:
-        st (module): Streamlit module for UI creation.
-        temp_dict (dict): Temporary dictionary to store the model path and other configuration.
-        model_path (str): Path to the loaded model.
-        model (YOLO): The YOLO model instance.
-        source (str): Selected video source (webcam or video file).
-        enable_trk (str): Enable tracking option ("Yes" or "No").
-        conf (float): Confidence threshold for detection.
-        iou (float): IoU threshold for non-maximum suppression.
-        org_frame (Any): Container for the original frame to be displayed.
-        ann_frame (Any): Container for the annotated frame to be displayed.
-        vid_file_name (str | int): Name of the uploaded video file or webcam index.
-        selected_ind (List[int]): List of selected class indices for detection.
-
-    Methods:
-        web_ui: Sets up the Streamlit web interface with custom HTML elements.
-        sidebar: Configures the Streamlit sidebar for model and inference settings.
-        source_upload: Handles video file uploads through the Streamlit interface.
-        configure: Configures the model and loads selected classes for inference.
-        inference: Performs real-time object detection inference.
-
-    Examples:
-        >>> inf = Inference(model="path/to/model.pt")  # Model is an optional argument
-        >>> inf.inference()
-    """
 
     def __init__(self, **kwargs: Any):
-        """
-        Initialize the Inference class, checking Streamlit requirements and setting up the model path.
-
-        Args:
-            **kwargs (Any): Additional keyword arguments for model configuration.
-        """
         check_requirements("streamlit>=1.29.0")  # scope imports for faster ultralytics package load speeds
         import streamlit as st
 
@@ -86,10 +49,6 @@ class Inference:
 
     def sidebar(self):
         """Configure the Streamlit sidebar for model and inference settings."""
-        with self.st.sidebar:  # Add Ultralytics LOGO
-            logo = "https://tracuuxettuyen.hcmute.edu.vn/assets/img/logo/ute_logo.png"
-            self.st.image(logo, width=250)
-
         self.st.sidebar.title("User Configuration")  # Add elements to vertical setting menu
         self.source = self.st.sidebar.selectbox(
             "Video",
