@@ -1,10 +1,10 @@
 import streamlit as st
-from modules import GioiThieu, Chuong3, Chuong4, Chuong9, NhanDienKhuonMat, trai_cay, nhan_dien_ban_tay, nhan_dien_chu_ki_hieu
+from modules import GioiThieu, Chuong3, Chuong4, Chuong9, NhanDienKhuonMat, trai_cay, nhan_dien_ban_tay, nhan_dien_chu_ki_hieu, lane_detect
 import streamlit as st
 import os
 
 
-st.set_page_config(page_title="Ứng dụng xử lý ảnh")
+st.set_page_config(page_title="Ứng dụng xử lý ảnh", layout="centered")
 
 # Khởi tạo trạng thái nếu chưa có
 if 'selected' not in st.session_state:
@@ -27,6 +27,7 @@ st.sidebar.button("Nhận diện khuôn mặt", on_click=set_selection, args=("N
 st.sidebar.button("Nhận diện trái cây", on_click=set_selection, args=("TraiCay",))
 st.sidebar.button("Nhận diện bàn tay", on_click=set_selection, args=("BanTay",))
 st.sidebar.button("Nhận diện ngôn ngữ kí hiệu, ghép câu", on_click=set_selection, args=("GhepCauKiHieu",))
+st.sidebar.button("Lane Detection", on_click=set_selection, args=("LaneDetection",))
 
 # Hiển thị nội dung tương ứng
 selected = st.session_state.selected
@@ -47,4 +48,6 @@ elif selected == "BanTay":
     nhan_dien_ban_tay.show()
 elif selected == "GhepCauKiHieu":
     nhan_dien_chu_ki_hieu.show()
+elif selected == "LaneDetection":
+    lane_detect.show()
 
