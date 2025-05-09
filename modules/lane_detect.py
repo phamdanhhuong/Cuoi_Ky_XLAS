@@ -2,14 +2,11 @@ from library import lane
 import streamlit as st
 import cv2
 import numpy as np
-import os
 
 
 
 def show():
-    st.title("Lane Detection")
-    video_path = os.path.abspath("./images/lane.mp4")
-    print(f"Video path: {video_path}")
+    st.markdown("<div style='text-align: center; font-size: 24px; font-weight: 600;'>Lane Detection</div><br><br>", unsafe_allow_html=True)
 
     # Trạng thái session
     if 'running' not in st.session_state:

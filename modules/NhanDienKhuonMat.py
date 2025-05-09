@@ -6,8 +6,7 @@ import argparse
 import joblib
 
 def show():
-    st.subheader("Nhận diện khuôn mặt")
-
+    st.markdown("<div style='text-align: center; font-size: 24px; font-weight: 600;'>Nhận diện khuôn mặt</div>", unsafe_allow_html=True)
     run = st.checkbox('Bắt đầu')
 
     video_source = st.selectbox(

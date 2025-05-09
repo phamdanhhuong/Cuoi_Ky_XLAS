@@ -4,7 +4,7 @@ import streamlit as st
 import os
 
 
-st.set_page_config(page_title="Ứng dụng xử lý ảnh", layout="centered")
+st.set_page_config(page_title="Ứng dụng xử lý ảnh", layout="wide")
 
 # Khởi tạo trạng thái nếu chưa có
 if 'selected' not in st.session_state:
