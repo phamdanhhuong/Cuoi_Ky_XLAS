@@ -76,7 +76,7 @@ h1, h2, h3 {
 }
 
 div[data-testid="stSidebarContent"]{
-    background: linear-gradient(to right, rgba(50, 0, 100, 0.7), rgba(0, 0, 0, 0.7) );
+    background: linear-gradient(to right, rgba(50, 0, 100, 0.7), rgba(30, 30, 30, 0.7) );
 }
 
 /* Style cho nút secondary */
