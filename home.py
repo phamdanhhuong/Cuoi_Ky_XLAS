@@ -76,6 +76,25 @@ h1, h2, h3 {
     color: #f2f2f2;
 }
 
+/* Style cho nút secondary */
+button[data-testid="stBaseButton-secondary"] {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(50, 0, 100, 0.7));
+    color: white;
+    border: 1px solid white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    width: 260px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button[data-testid="stBaseButton-secondary"]:hover {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(50, 0, 100, 0.9));
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)

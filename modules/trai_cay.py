@@ -54,11 +54,11 @@ class Inference:
             "Video",
             ("webcam", "video"),
         )  # Add source selection dropdown
-        self.enable_trk = self.st.sidebar.radio("Enable Tracking", ("Yes", "No"))  # Enable object tracking
-        self.conf = float(
-            self.st.sidebar.slider("Confidence Threshold", 0.0, 1.0, self.conf, 0.01)
-        )  # Slider for confidence
-        self.iou = float(self.st.sidebar.slider("IoU Threshold", 0.0, 1.0, self.iou, 0.01))  # Slider for NMS threshold
+        # self.enable_trk = self.st.sidebar.radio("Enable Tracking", ("Yes", "No"))  # Enable object tracking
+        # self.conf = float(
+        #     self.st.sidebar.slider("Confidence Threshold", 0.0, 1.0, self.conf, 0.01)
+        # )  # Slider for confidence
+        # self.iou = float(self.st.sidebar.slider("IoU Threshold", 0.0, 1.0, self.iou, 0.01))  # Slider for NMS threshold
 
         col1, col2 = self.st.columns(2)  # Create two columns for displaying frames
         self.org_frame = col1.empty()  # Container for original frame
