@@ -73,7 +73,7 @@ html, body, [data-testid="stAppViewContainer"] {
 }
 
 h1, h2, h3 {
-    color: #f2f2f2;
+    color: #E0E0FF;
 }
 
 /* Style cho nút secondary */

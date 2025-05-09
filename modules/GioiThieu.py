@@ -42,12 +42,22 @@ def show():
     }
 
     .members {
-        padding: 1em;
-        background-color: transparent;
-        border-radius: 8px;
-    }
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(50, 0, 100, 0.7));
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: auto;
+        }
     .member-item {
-        margin-bottom: 0.5em;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        font-size: 16px;
+        color: #f0f0f0;
+        font-family: 'Open Sans', sans-serif;
     }
 
     </style>
@@ -82,8 +92,8 @@ def show():
     with st.container():
         st.markdown(
         """
-        <h3>Thành viên:</h3>
         <div class="members">
+            <h3>Thành viên:</h3>
             <div class="member-item">
                 <strong>Phạm Danh Hưởng</strong> - MSSV: 22110344
             </div>
