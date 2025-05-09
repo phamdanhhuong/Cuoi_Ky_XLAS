@@ -4,7 +4,7 @@ import streamlit as st
 import os
 
 
-st.set_page_config(page_title="Ứng dụng xử lý ảnh", layout="wide")
+st.set_page_config(page_title="Ứng dụng xử lý ảnh")
 
 # Khởi tạo trạng thái nếu chưa có
 if 'selected' not in st.session_state:
@@ -51,3 +51,31 @@ elif selected == "GhepCauKiHieu":
 elif selected == "LaneDetection":
     lane_detect.show()
 
+
+
+page_bg = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html, body, [data-testid="stAppViewContainer"] {
+    font-family: 'Open Sans', sans-serif;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.4), 
+        rgba(0, 0, 0, 0.4)
+    ), url("https://images.unsplash.com/photo-1465101162946-4377e57745c3?q=80&w=2078&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(255, 255, 255, 0);
+}
+
+h1, h2, h3 {
+    color: #f2f2f2;
+}
+
+</style>
+"""
+st.markdown(page_bg, unsafe_allow_html=True)
