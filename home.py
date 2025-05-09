@@ -18,7 +18,6 @@ def set_selection(choice):
 with st.sidebar:  
     logo = "https://tracuuxettuyen.hcmute.edu.vn/assets/img/logo/ute_logo.png"
     st.image(logo, width=250)
-st.sidebar.title("Menu")
 st.sidebar.button("Giới thiệu", on_click=set_selection, args=("GioiThieu",))
 st.sidebar.button("Chương 3", on_click=set_selection, args=("Chuong3",))
 st.sidebar.button("Chương 4", on_click=set_selection, args=("Chuong4",))
@@ -74,6 +73,10 @@ html, body, [data-testid="stAppViewContainer"] {
 
 h1, h2, h3 {
     color: #E0E0FF;
+}
+
+div[data-testid="stSidebarContent"]{
+    background: linear-gradient(to right, rgba(50, 0, 100, 0.7), rgba(0, 0, 0, 0.7) );
 }
 
 /* Style cho nút secondary */
