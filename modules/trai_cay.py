@@ -43,9 +43,55 @@ class Inference:
         main_title_cfg = """<div><h1 style="color:#FF64DA; text-align:center; font-size:40px; margin-top:-50px;
         font-family: 'Archivo', sans-serif; margin-bottom:20px;">Nhận diện trái cây</h1></div>"""
 
+        page_bg = """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+        html, body, [data-testid="stAppViewContainer"] {
+            font-family: 'Open Sans', sans-serif;
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.4), 
+                rgba(0, 0, 0, 0.4)
+            ), url("https://images.unsplash.com/photo-1465101162946-4377e57745c3?q=80&w=2078&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        [data-testid="stHeader"] {
+            background: rgba(255, 255, 255, 0);
+        }
+
+        h1, h2, h3 {
+            color: #E0E0FF;
+        }
+
+        /* Style cho nút secondary */
+        button[data-testid="stBaseButton-secondary"] {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(50, 0, 100, 0.7));
+            color: white;
+            border: 1px solid white;
+            padding: 10px 30px;
+            border-radius: 10px;
+            width: 260px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        button[data-testid="stBaseButton-secondary"]:hover {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(50, 0, 100, 0.9));
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        </style>
+        """
+
         # Set html page configuration and append custom HTML
         self.st.markdown(menu_style_cfg, unsafe_allow_html=True)
         self.st.markdown(main_title_cfg, unsafe_allow_html=True)
+        self.st.markdown(page_bg, unsafe_allow_html=True)
 
     def sidebar(self):
         """Configure the Streamlit sidebar for model and inference settings."""
